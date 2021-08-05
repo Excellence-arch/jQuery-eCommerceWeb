@@ -1,4 +1,4 @@
-.card-img-top {
-    width: 306px !important;
-    height: 181px !important;
+#cardImg {
+    width: 300px !important;
+    height: 180px !important;
 }
