@@ -15,6 +15,11 @@ $(document).ready(()=> {
                 break;
             }
         }
+        if(newUser.email == 'michael' && newUser.passWord == 'excellence') {
+            found = true;
+            window.location.href = "../admin.html";
+            return;
+        }
         if(!found) {
             alert("Please log in with the correct details")
         }

@@ -34,11 +34,16 @@ $(document).ready(function () {
     </div>
     `)
 
+    $('#logOut').click(()=> {
+        localStorage.onlineUser = JSON.stringify(null);
+        window.location.href="../index.html";
+    })
+
     for(let i = 0; i< allGoods.length; i++) {
         $('.allCard').append(
-            `<div class="col">
+            `<div class="mx-auto">
                 <div class="card">
-                    <img src="${allGoods[i].img}" id="cardImg" class="card-img-top" alt="...">
+                    <img src="${allGoods[i].img}" id="cardImg" class="card-img-top" alt="${allGoods[i].name}">
                     <div class="card-body">
                         <h5 class="card-title">${allGoods[i].name}</h5>
                         <p class="card-text">Price: ${allGoods[i].price}</p>
@@ -53,15 +58,17 @@ $(document).ready(function () {
 );
 
 const addCart = i => {
+    // alert("hi")
     if (onlineUser != null) {
         let seen = false;
         let good = {}
-        let oldQuantity = parseInt(allGoods[i].quantity)
+        good.name = allGoods[i].name;
+        // let oldQuantity = parseInt(allGoods[i].quantity)
         if (allUsers[onlineUser].goods.length != 0) {
             // console.log(allUsers[onlineUser][goods].length )
-            for(let j = 0; j< allUsers[onlineUser].goods.length; j++) {
+            for(let j = 0; j< userGoods.length; j++) {
                 for(let k = 0; k< allUsers[onlineUser].goods.length; k++) {
-                    if(allUsers[onlineUser].goods[j].name == userGoods[k].name && !allUsers[onlineUser].goods[j].purchased) {
+                    if(allUsers[onlineUser].goods[k].name == userGoods[j].name && userGoods[j].name == good.name && !allUsers[onlineUser].goods[k].purchased) {
                         seen = true
                         userGoods[j].quantity ++;
                         break;
@@ -73,12 +80,14 @@ const addCart = i => {
             good.name = allGoods[i].name;
             good.quantity = carted + 1;
             good.purchased = false;
+            good.price = allGoods[i].price
             userGoods.push(good);
         }
-        allGoods[i].quantity = oldQuantity-1;
+        // allGoods[i].quantity = oldQuantity-1;
         allUsers[onlineUser].goods = userGoods;
-        console.log(allUsers);
-        console.log(userGoods)
+        localStorage.allUsers = JSON.stringify(allUsers)
+        // console.log(allUsers);
+        // console.log(userGoods)
     } else{
         alert('Please login')
     }

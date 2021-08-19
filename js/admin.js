@@ -11,7 +11,7 @@ $(document).ready(function () {
         let found = false;
         let newGood = {};
         let img = $('#goodImg').val()
-        newGood.img = './images//'+img.slice(12, goodImg.length);
+        newGood.img = './images//'+img.slice(12);
         newGood.name = $("#goodName").val();
         newGood.quantity = $("#goodQuantity").val();
         newGood.price = $("#goodPrice").val();
